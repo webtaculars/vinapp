@@ -1,0 +1,26 @@
+{
+  "name": "vinapp",
+  "version": "1.0.0",
+  "description": "App to find car history",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "connect": "^3.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.29",
+    "nodemailer": "^2.3.2",
+    "nodemailer-smtp-transport": "^2.5.0",
+    "paypal-ipn": "^3.0.0",
+    "pp-ipn": "^1.0.5",
+    "querystring": "^0.2.0",
+    "request": "^2.72.0",
+    "spdy": "^3.3.2"
+  }
+}

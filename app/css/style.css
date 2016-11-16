@@ -1,0 +1,138 @@
+/*Global Styles*/
+img { max-width: 100% }
+.d-block { display: block; }
+body {
+    color: #384047;
+    font-family: "open sans";
+}
+h2 {
+    color: #384047; 
+    font-weight: 700;
+    text-align: center;
+    font-size: 30px;
+}
+h4 {
+    text-align: center;
+    color: #86979d;
+    font-size: 20px;
+    line-height: 1.42857143;
+}
+.title {
+    color: #384047; 
+    font-weight: 700;
+    text-align: center;
+    font-size: 20px;
+}
+.description {
+    text-align: center;
+    font-size: 14px;
+    color: #86979d;
+    font-weight: 500;
+} 
+#successpage {
+    width: 100%;
+    height: 100%;
+    background-image: url(/img/background.jpg);
+    background-color: #2D92D5;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#bg-div {
+    background-image: url(/img/background.jpg);
+    background-color: #2D92D5;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#head-anchors {
+    margin-top: 5px;
+}
+#head-anchors a {
+    color: white;
+}
+#bg-div-2 {
+    background-color: #F4F4F4;
+}
+#bg-div-3 {
+    background-image: url(/img/background2.jpg);
+    background-color: #2D92D5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer {
+    text-align: center;
+}
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.has-error .checkbox,
+.has-error .checkbox-inline,
+.has-error .control-label,
+.has-error .help-block,
+.has-error .radio,
+.has-error .radio-inline,
+.has-error.checkbox label,
+.has-error.checkbox-inline label,
+.has-error.radio label,
+.has-error.radio-inline label {
+    color: white !important;
+    font-size: 14px;
+}
+.heading {
+    text-align: center;
+    font-size: 48px;
+    color: #ffffff;
+    font-family: "open sans";
+    font-weight: 300;
+}
+
+#main-header .main-nav{ margin-bottom: 0;background: #2dcc70;border:0 none;color:#fff;border-radius: 0;-webkit-border-radius: 0;-moz-border-radius: 0;-0-border-radius: 0; }
+#main-header .main-nav a { color:#fff; }
+#main-header .main-nav .navbar-brand { height: auto; }
+#main-header .navbar-collapse{ text-align: center; }
+#main-header .navbar-collapse ul.nav.navbar-nav { display: inline-block;float:none;vertical-align: middle; }
+#main-header .main-nav .dropdown.open a { background:#2bb967; }
+#main-header .main-nav .dropdown.open ul a { background:#fff;color:#2bb967; }
+#main-header .main-nav .dropdown.open ul a:hover { color:#fff;background:#2bb967; }
+#main-header .main-nav .navbar-toggle { border:0 none; }
+#main-header .main-nav .navbar-toggle .icon-bar { background:#fff; }
+#main-header .main-nav .navbar-toggle:focus, #main-header .main-nav .navbar-toggle:hover { background:#2bb967; }
+#scroll-top { padding-top: 56px; }
+
+
+@media (max-width: 460px) {
+    .heading {
+        text-align: center;
+        font-size: 20px;
+        color: #ffffff;
+        font-family: "open sans";
+        font-weight: 300;
+    }
+}
+
+@media (max-width:770px) and (min-width:461px) {
+    .heading {
+        text-align: center;
+        font-size: 35px;
+        color: #ffffff;
+        font-family: "open sans";
+        font-weight: 300;
+    }
+}
+
+@media (max-width:768px){
+#main-header .navbar-collapse ul.nav.navbar-nav { display: block; }
+#main-header .main-nav .dropdown.open ul a { border-bottom: 1px solid #2bb967; }
+}
+
+/* page not found*/
+
+body.error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==);}
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }

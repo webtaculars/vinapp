@@ -1,0 +1,57 @@
+<div class="container" data-ng-controller="CheckoutController" data-ng-init="getBasicInfo()">
+    <div class="row">
+        <h1>This is the checkout page</h1>
+        <h3><b>Vin:</b> {{basicInfo.vin}}</h3>
+        <h3><b>Model:</b> {{basicInfo.year}} {{basicInfo.make}} {{basicInfo.series}}</h3>
+        <h3><b>Body Style:</b> {{basicInfo.bodyStyle}}</h3>
+        <h3><b>Country of assembly:</b> {{basicInfo.assembly}}</h3>
+    </div>
+    <div class="row">
+         <form id="checkout-form" name="payment" ng-submit="processPayment()">
+            <div id="error-message"></div>
+            <label>Amount (X.XX)</label>
+            <input type="number" ng-model="amount" />
+            <label>Credit Card Number (XXXX XXXX XXXX XXXX)</label>
+            <input type="number" ng-model="creditCardNumber" />
+            <label>Expiration Date (MM/YY)</label>
+            <input type="text" ng-model="expirationDate" />
+            <input type="hidden" name="payment-method-nonce">
+            <input type="submit" value="Pay Now">
+        </form>
+ 
+        <!-- Load the Client component. -->
+        <script src="https://js.braintreegateway.com/js/braintree-2.29.0.min.js"></script>
+        <script src="https://js.braintreegateway.com/web/3.3.0/js/client.min.js"></script>
+        <!-- Load the Hosted Fields component. -->
+        <script src="https://js.braintreegateway.com/web/3.3.0/js/hosted-fields.min.js"></script>
+<!--         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="vinForm" class="form-horizontal" method="post">
+            <div class="form-group">
+                <fieldset>
+                    <h3>Billing Info</h3>
+                    <div class="form-group">
+                        <label>Email*</label>
+                        <input type="email" required name="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input name="night_phone_a" placeholder="610" />
+                        <input name="night_phone_b" placeholder="555" />
+                        <input name="night_phone_c" placeholder="1234" />
+                    </div>
+                </fieldset>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <input type="submit" class="btn btn-success input-lg" style="width:100%; text-align:center; font-weight:600; background-color:#2ECC71; border-radius:2px" value="Proceed with paypal">
+                </div>
+                <input type="hidden" name="item_number" value="{{basicInfo.vin}}">
+                <INPUT TYPE="hidden" name="cmd" value="_xclick">
+                <INPUT TYPE="hidden" NAME="return" value="https://grumpycars.com/success.html">
+                <INPUT TYPE="hidden" NAME="notify_url" value="http://dev.grumpycars.com/paypal-notify">
+                <input type="hidden" name="business" value="muddaserahmed-facilitator@gmail.com">
+                <input type="hidden" name="item_name" value="Grumpy Cars Report">
+                <input type="hidden" name="amount" value="20">
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+            </div>
+        </form>
+ -->    </div>
+</div>

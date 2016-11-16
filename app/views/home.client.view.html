@@ -1,0 +1,528 @@
+<style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#myInput {
+  border-box: box-sizing;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #ddd
+}
+
+.show {
+  display: block;
+}
+</style>
+<header id="main-header">
+  <nav class="navbar navbar-default main-nav" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="img/grumpy-cars-logo.png" alt="">
+        </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Why You Need A Report</a></li>
+          <li><a href="#">Questions</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Sign In</a></li>
+              <li><a href="#">Sign Up</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+  </nav>
+</header>
+<div class="container-fluid;" ng-controller="HomeController">
+  <div id="bg-div">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-3 col-xs-2"></div>
+      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-8">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12"><img class="img-responsive" src="/img/logo.png" style="display:block; margin-left:auto; margin-right:auto" alt="Grumpy Cars">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-3 col-xs-2"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-2 col-lg-3 col-sm-1"></div>
+      <div class="col-md-8 col-lg-6 col-sm-10 col-xs-12">
+        <p class="heading">
+          Don't <strong style="font-weight:600;">risk</strong> buying a vehicle
+        </p>
+        <p class="heading">
+          without knowing its <strong style="font-weight:600;">history</strong>
+        </p>
+      </div>
+      <div class="col-md-2 col-sm-1 col-lg-6"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-3 col-lg-2 col-sm-2 col-xs-1"></div>
+      <div class="col-md-6 col-lg-8 col-sm-8 col-xs-10">
+        <div class="row">
+          <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="vinForm" class="form-horizontal" method="post"> -->
+          <form ng-submit="checkout()" id="vinForm" class="form-horizontal">
+            <div class="form-group">
+              <div class="'col-xs-12 col-sm-8 col-md-8 col-lg-8'  {{isValid ?  'has-success' : 'has-error'}} {{isTouched ? 'has-feedback' : ''}}">
+                <input limit-to="17" autofocus type="text" ng-change="validate()" ng-model="vin" required class="form-control input-lg" style="font-weight:600; border-radius:2px" name="item_number" placeholder="Enter your car's VIN..." />
+                <div id="myDropdown" class="dropdown-content" ng-show="typeInProcess" ng-repeat="state in states track by $index">
+                  <a href="#" ng-model="asd" ng-click="changeValue()">{{state}}</a>
+                </div>
+                <i ng-show="isTouched && !isValid" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-remove" data-fv-icon-for="item_number" style="display: block;"></i>
+                <i ng-show="isTouched && isValid" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-ok" data-fv-icon-for="item_number" style="display: block; padding-top: 5px;"></i>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <input type="submit" ng-disabled="!isValid" class="btn btn-success input-lg" style="width:100%; text-align:center; font-weight:600; background-color:#2ECC71; border-radius:2px" value="GET REPORT">
+              </div>
+              <INPUT TYPE="hidden" name="cmd" value="_xclick">
+              <INPUT TYPE="hidden" NAME="return" value="https://grumpycars.com/success.html">
+              <INPUT TYPE="hidden" NAME="notify_url" value="http://dev.grumpycars.com/paypal-notify">
+              <input type="hidden" name="business" value="muddaserahmed-facilitator@gmail.com">
+              <input type="hidden" name="item_name" value="Grumpy Cars Report">
+              <input type="hidden" name="amount" value="20">
+              <input type="hidden" name="quantity" value="1">
+              <input type="hidden" name="currency_code" value="USD">
+            </div>
+            <div class="form-group">
+              <div id="head-anchors" class="col-xs-12 hidden-md hidden-sm hidden-lg">
+                <a style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="A Grumpy Cars report costs $20">
+                            What does it cost?</a>
+              </div>
+              <div id="head-anchors" class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <a style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="The 17 character Vehicle Identification Number (VIN) is displayed on the registration certificate. It can also be found on the vehicle itself, either on the compliance plate located in the engine bay or on one of the door posts (where the door latches when it is closed), or on the passenger side windshield.">
+                            Where can I find the VIN?</a>
+                <br>
+                <a target="_blank" ui-sref="example-report">Example Report</a>
+              </div>
+              <div id="head-anchors" class="col-sm-4 col-md-4 col-lg-4 text-center hidden-xs">
+                <a style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="A Grumpy Cars report costs $20">
+                            What does it cost?</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-2 col-sm-2 col-xs-1"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-2">
+        <p style="text-align: center;"><span style="font-size:14px; color:#ffffff;">SCROLL DOWN TO EXPLORE</span>
+        </p>
+      </div>
+      <div class="col-lg-5"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-2">
+        <a href="#" id="scroll-down"><img class="img-responsive" style="display:block; margin-right:auto; margin-left:auto" src="/img/scroll-down.png" alt="Scroll Down">
+        </a>
+      </div>
+      <div class="col-lg-5"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+  <br>
+  <br>
+  <div id="scroll-top" class="row">
+    <div class="col-md-1 col-lg-2"></div>
+    <div class="col-md-10 col-lg-8">
+      <h2>What you get in a Grumpy Cars report</h2>
+    </div>
+    <div class="col-md-1 col-lg-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+      <h4>You will recieve a comprehensive and in-depth documentation of the vehicles accidents, mileage, usage, modifications and more.</h4>
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8"><img src="/img/report-features.png" class="img-responsive" style="display:block; margin-right:auto; margin-left:auto" alt="Features">
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-3 col-md-2"></div>
+    <div class="col-lg-6 col-md-8">
+      <h2>Some great features of our service</h2>
+    </div>
+    <div class="col-lg-3 col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-2"></div>
+    <div class="col-lg-6 col-md-8">
+      <h4>With our advanced features, you'll fall in love with</h4>
+    </div>
+    <div class="col-lg-3 col-md-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-1 col-md-2"></div>
+    <div class="col-lg-10 col-md-8">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2 col-md-3 col-sm-3"><img src="/img/feature-icon-1.png" style="display:block; margin-left:auto; margin-right:auto" alt="">
+          <h2 class="title">Advanced Report</h2>
+          <p class="description">Our reports contain everything you need to ensure there are no hidden problems with the vehicle itself.</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3"><img src="/img/feature-icon-2.png" style="display:block; margin-left:auto; margin-right:auto" alt="">
+          <h2 class="title">Odometer Fraud</h2>
+          <p class="description">1 in 10 used cars have odometers that have been tampered with. Don't fall victim to a mileage discrepancy.</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3"><img src="/img/feature-icon-3.png" style="display:block; margin-left:auto; margin-right:auto" alt="">
+          <h2 class="title">Previous Ownership</h2>
+          <p class="description">Take a look at the places the car has been and find out about its previous usage.</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3"><img src="/img/feature-icon-4.png" style="display:block; margin-left:auto; margin-right:auto" alt="">
+          <h2 class="title">Detailed Inspection</h2>
+          <p class="description">Also included is a list of historical events in chronological order. Discrepancies will be brought to light.</p>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <h2>You're in a good hands</h2>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <h4>We are powered by the most trusted brands</h4>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6"><img class="img-responsive" src="/img/client-logos.png" alt="" style="display:block; margin-left:auto; margin-right:auto">
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+  <br>
+  <br>
+  <div id="bg-div-2">
+    <br>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2>What our customers said</h2>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h4>Don't take our word, see our testimonials</h4>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-1 col-md-2 col-sm-1"></div>
+      <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-8">
+            <div style="background-color:white; padding:20px 10px 20px 10px;">
+              <p><span style="color:#94a3a8;"><em><span style="font-size:16px;"><span
+                            style="font-family:georgia,serif;">I would just like to take the time to say thank you as I could have bought a lemon as this way I have the facts rather than the fictional story given.</span></span>
+                </em>
+                </span>
+              </p>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-3 col-sm-4 col-xs-3"><img class="img-circle img-responsive" src="/img/customer1.jpg" style="display:block; margin-left:auto; margin-right:auto" alt="Customer">
+              </div>
+              <div class="col-md-9 col-sm-8 col-xs-9">
+                <h2 style="margin-top:-5px"><span style="font-size:16px;"><span
+                                style="color:#384047;"><strong>Donna</strong></span></span></h2>
+                <p><span style="color:#7e9096;"><span style="font-size:14px;">Vancouver, British Columbia</span></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
+        <div class="row">
+          <div class="col-lg-8">
+            <div style="background-color:white; padding:20px 10px 20px 10px;">
+              <p><span style="color:#94a3a8;"><em><span style="font-size:16px;"><span
+                            style="font-family:georgia,serif;">Let me say thanks again to Grumpy Cars for saving me from a terrible mistake. I'd have to say it's the best twenty dollars I've spent! Well done.</span></span>
+                </em>
+                </span>
+              </p>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-3 col-sm-4 col-xs-3"><img class="img-circle img-responsive" src="/img/customer2.jpg" style="display:block; margin-left:auto; margin-right:auto">
+              </div>
+              <div class="col-md-9 col-sm-4 col-xs-9">
+                <h2 style="margin-top:-5px"><span style="font-size:16px;"><span
+                                style="color:#384047;"><strong>Glenn</strong></span></span></h2>
+                <p><span style="color:#7e9096;"><span style="font-size:14px;">Toronto, Ontario</span></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4"></div>
+        </div>
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-1"></div>
+    </div>
+    <br>
+    <br>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <h2>Simple system. No hassle</h2>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <h4>No delays. No risk. No worries</h4>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-1 col-md-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div class="row">
+            <div style="margin-bottom:5px" class="col-md-4 col-lg-4 col-sm-4 col-xs-12"><img class="img-responsive" style="display:block; margin-left:auto; margin-right:auto" src="/img/step1.PNG" alt="Step 1">
+            </div>
+            <div style="margin-bottom:5px" class="col-md-4 col-lg-4 col-sm-4 col-xs-12"><img class="img-responsive" style="display:block; margin-left:auto; margin-right:auto" src="/img/step2.PNG" alt="Step 2">
+            </div>
+            <div style="margin-bottom:5px" class="col-md-4 col-lg-4 col-sm-4 col-xs-12"><img class="img-responsive" style="display:block; margin-left:auto; margin-right:auto" src="/img/step3.PNG" alt="Step 3">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1"></div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-3 col-md-3"></div>
+    <div class="col-lg-6 col-md-6">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="col-lg-3 col-md-3"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="row">
+        <div class="col-xs-4 col-md-3 col-sm-2"></div>
+        <div class="col-xs-12 col-md-9 col-sm-10">
+          <h2 class="title">How long does it take to get a report?</h2>
+          <p class="description">When you order a vehicle report, Grumpy Cars’ systems immediately access databases to compile the report. This usually takes less than 3 minutes, however it can take up to 30 minutes. Your report will be <strong>emailed</strong> to the email address you provided during payment as soon as it is ready.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="row">
+        <div class="col-xs-12 col-md-9 col-sm-10">
+          <h2 class="title">Where can I find the VIN?</h2>
+          <p class="description">The Vehicle Identification Number <strong>(VIN)</strong> can be found on the vehicle itself, either on the dashboard, or on one of the door posts (where the door latches when it is closed). The vehicle’s VIN is also displayed on the registration certificate and insurance policy documentation.</p>
+        </div>
+        <div class="col-xs-4 col-md-3 col-sm-2"></div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="row">
+        <div class="col-xs-4 col-md-3 col-sm-2"></div>
+        <div class="col-xs-12 col-md-9 col-sm-10">
+          <h2 class="title">How much does it cost?</h2>
+          <p class="description">A Grumpy Cars report costs <strong>$20</strong>. This payment can be processed through PayPal and the report will be delivered almost instantly.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="row">
+        <div class="col-xs-12 col-md-9 col-sm-10">
+          <h2 class="title">Why should I get a car history report?</h2>
+          <p class="description">The Grumpy Cars Report is a comprehensive documentation on the history of a used motor vehicle that has been registered or serviced. It provides information about the vehicle's history that may not be evident by looking at a vehicle in person. This helps people buy better and safer cars.</p>
+        </div>
+        <div class="col-xs-4 col-md-3 col-sm-2"></div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+  </div>
+  <br>
+  <div id="bg-div-3">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <p style="text-align: center;"><span class="heading"><span><span>Know the story <strong style="font-weight:600;">before</strong> </span></span>
+          </span>
+        </p>
+        <p style="text-align: center;"><span class="heading"><span><span>you buy a used car.</span></span>
+          </span>
+        </p>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3"></div>
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6">
+        <input id="scroll-to-top" style="width:100%; text-align:center; font-weight:600; background-color:#2ECC71; border-radius:2px" type="button" class="btn btn-success btn-lg" value="Get Report">
+      </div>
+      <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-8">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 footer"><a id="contact" ui-sref="contact">Contact</a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 footer"><a id="privacy" ui-sref="privacy">Privacy
+                    Policy</a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 footer"><a id="tos" ui-sref="terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4">
+      <p class="description">© 2016 Grumpy Cars. All Rights Reserved</p>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+  </div>
+  <br>
+  <br>
+  <br>
+</div>
